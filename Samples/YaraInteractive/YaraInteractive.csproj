@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\dnYara\dnYara.csproj" />
-    <ProjectReference Include="..\..\Libraries\dnYara.NativePack\dnYara.NativePack.csproj" />
   </ItemGroup>
 
 </Project>

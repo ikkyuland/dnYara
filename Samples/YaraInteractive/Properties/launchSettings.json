@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "YaraInteractive": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

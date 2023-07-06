@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FFF83306-8420-4A57-8403-791209FFEDC2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>dnYara.Interop_ancient</RootNamespace>
+    <AssemblyName>dnYara.Interop_ancient</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interops\Constants.cs" />
+    <Compile Include="Interops\Delegates.cs" />
+    <Compile Include="Interops\Enums\YR_CALLBACK_MESSAGE.cs" />
+    <Compile Include="Interops\Enums\YR_CALLBACK_RESULT.cs" />
+    <Compile Include="Interops\Enums\YR_SCAN_FLAGS.cs" />
+    <Compile Include="Interops\Methods.cs" />
+    <Compile Include="Interops\ObjRefHelper.cs" />
+    <Compile Include="Interops\Types\FILE.cs" />
+    <Compile Include="Interops\Types\RE_AST.cs" />
+    <Compile Include="Interops\Types\RE_CLASS.cs" />
+    <Compile Include="Interops\Types\RE_NODE.cs" />
+    <Compile Include="Interops\Types\RE_NODE_UNION1.cs" />
+    <Compile Include="Interops\Types\RE_NODE_UNION2.cs" />
+    <Compile Include="Interops\Types\SETJMP_FLOAT128.cs" />
+    <Compile Include="Interops\Types\Types.cs" />
+    <Compile Include="Interops\Types\YARA_ERROR.cs" />
+    <Compile Include="Interops\Types\YR_AC_MATCH.cs" />
+    <Compile Include="Interops\Types\YR_AC_MATCH_TABLE_ENTRY.cs" />
+    <Compile Include="Interops\Types\YR_ARENA.cs" />
+    <Compile Include="Interops\Types\YR_ARENA_PAGE.cs" />
+    <Compile Include="Interops\Types\YR_ATOMS_CONFIG.cs" />
+    <Compile Include="Interops\Types\YR_ATOM_QUALITY_TABLE_ENTRY.cs" />
+    <Compile Include="Interops\Types\YR_COMPILER.cs" />
+    <Compile Include="Interops\Types\YR_CONFIG_NAME.cs" />
+    <Compile Include="Interops\Types\YR_MATCH.cs" />
+    <Compile Include="Interops\Types\YR_MATCHES.cs" />
+    <Compile Include="Interops\Types\YR_META.cs" />
+    <Compile Include="Interops\Types\YR_OBJ_REF.cs" />
+    <Compile Include="Interops\Types\YR_PROFILING_INFO.cs" />
+    <Compile Include="Interops\Types\YR_RELOC.cs" />
+    <Compile Include="Interops\Types\YR_RULE.cs" />
+    <Compile Include="Interops\Types\YR_RULES.cs" />
+    <Compile Include="Interops\Types\YR_SCAN_CONTEXT.cs" />
+    <Compile Include="Interops\Types\YR_STOPWATCH.cs" />
+    <Compile Include="Interops\Types\YR_STRING.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
