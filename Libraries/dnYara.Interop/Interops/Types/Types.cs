@@ -18,7 +18,7 @@ namespace dnYara.Interop
     ///rule: YR_RULE*
     ///message: char*
     ///user_data: void*
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void YR_COMPILER_CALLBACK_FUNC(
         int error_level,
         [In, MarshalAs(UnmanagedType.LPStr)] string file_name,
@@ -33,13 +33,13 @@ namespace dnYara.Interop
     ///calling_rule_filename: char*
     ///calling_rule_namespace: char*
     ///user_data: void*
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate IntPtr YR_COMPILER_INCLUDE_CALLBACK_FUNC([In, MarshalAs(UnmanagedType.LPStr)] string include_name, [In()] [MarshalAs(UnmanagedType.LPStr)] string calling_rule_filename, [In()] [MarshalAs(UnmanagedType.LPStr)] string calling_rule_namespace, IntPtr user_data);
 
     /// Return Type: void
     ///callback_result_ptr: char*
     ///user_data: void*
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void YR_COMPILER_INCLUDE_FREE_FUNC([In, MarshalAs(UnmanagedType.LPStr)] string callback_result_ptr, IntPtr user_data);
 
     /// Return Type: void
@@ -47,21 +47,21 @@ namespace dnYara.Interop
     ///string_identifier: char*
     ///re_ast: RE_AST*
     ///user_data: void*
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void YR_COMPILER_RE_AST_CALLBACK_FUNC(ref YR_RULE rule, [In, MarshalAs(UnmanagedType.LPStr)] string string_identifier, ref RE_AST re_ast, IntPtr user_data);
 
     /// Return Type: int
     ///message: int
     ///message_data: void*
     ///user_data: void*
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate YR_CALLBACK_RESULT YR_CALLBACK_FUNC(System.IntPtr context, int message, System.IntPtr message_data, System.IntPtr user_data);
 
     /// Return Type: int
     ///config: YR_ATOMS_CONFIG*
     ///atom: unsigned char*
     ///atom_length: int
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int YR_ATOMS_QUALITY_FUNC(ref YR_ATOMS_CONFIG config, IntPtr atom, int atom_length);
 
 }

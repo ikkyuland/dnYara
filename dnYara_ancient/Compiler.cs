@@ -139,7 +139,7 @@ namespace dnYara
         public CompiledRules Compile()
         {
             IntPtr rulesPtr = new IntPtr();
-
+            //System.Diagnostics.Debugger.Break();
             ErrorUtility.ThrowOnError(
                 Methods.yr_compiler_get_rules(compilerPtr, ref rulesPtr));
 
@@ -170,16 +170,8 @@ namespace dnYara
             string message,
             IntPtr userData)
         {
-            YR_RULE? marshaledRule=new YR_RULE();
-            if (rule == IntPtr.Zero)
-            {
-                marshaledRule = new System.Nullable<YR_RULE>();
-            }
-            else
-            {
-                Marshal.PtrToStructure(rule, marshaledRule);
-            }
-            var ruleName = marshaledRule.HasValue ? "No Rule" : Marshal.PtrToStringAnsi(marshaledRule.Value.identifier);
+            YR_RULE? marshaledRule= (YR_RULE)Marshal.PtrToStructure(rule, typeof(YR_RULE));
+            var ruleName = marshaledRule.HasValue ? "No Rule" : Marshal.PtrToStringAnsi((IntPtr)marshaledRule.Value.identifier);
             var msg = string.Format("rule {3}, Line {1}, file: {2}: {0}",
                 message,
                 lineNumber,

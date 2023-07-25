@@ -27,10 +27,10 @@ namespace dnYara
             MatchingRule = new Rule(matchingRule);
             Matches = new Dictionary<string, List<Match>>();
 
-            var matchingStrings = ObjRefHelper.GetYaraStrings(matchingRule.strings);
+            var matchingStrings = ObjRefHelper.GetYaraStrings((IntPtr)matchingRule.strings);
             foreach (var str in matchingStrings)
             {
-                var identifier = str.identifier;
+                var identifier = (IntPtr)str.identifier;
 
                 if (identifier == IntPtr.Zero)
                     return;
@@ -61,22 +61,19 @@ namespace dnYara
         {
             if (Environment.OSVersion.Platform== PlatformID.Win32NT)
             {
-                YR_SCAN_CONTEXT_WIN scan_context = new YR_SCAN_CONTEXT_WIN();
-                Marshal.PtrToStructure(scanContext, scan_context);
+                YR_SCAN_CONTEXT_WIN scan_context = (YR_SCAN_CONTEXT_WIN)Marshal.PtrToStructure(scanContext, typeof(YR_SCAN_CONTEXT_WIN));
                 return scan_context.profiling_info;
             }
 
             if (Environment.OSVersion.Platform == PlatformID.Unix)
             {
-                YR_SCAN_CONTEXT_LINUX scan_context = new YR_SCAN_CONTEXT_LINUX();
-                Marshal.PtrToStructure(scanContext, scan_context);
+                YR_SCAN_CONTEXT_LINUX scan_context = (YR_SCAN_CONTEXT_LINUX)Marshal.PtrToStructure(scanContext, typeof(YR_SCAN_CONTEXT_LINUX));
                 return scan_context.profiling_info;
             }
 
             if (Environment.OSVersion.Platform == PlatformID.MacOSX)
             {
-                YR_SCAN_CONTEXT_OSX scan_context = new YR_SCAN_CONTEXT_OSX();
-                Marshal.PtrToStructure(scanContext, scan_context);
+                YR_SCAN_CONTEXT_OSX scan_context = (YR_SCAN_CONTEXT_OSX)Marshal.PtrToStructure(scanContext, typeof(YR_SCAN_CONTEXT_OSX));
                 return scan_context.profiling_info;
             }
             return IntPtr.Zero;
@@ -86,22 +83,21 @@ namespace dnYara
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
-                YR_SCAN_CONTEXT_WIN scan_context = new YR_SCAN_CONTEXT_WIN();
-                Marshal.PtrToStructure(scanContext, scan_context);
+                YR_SCAN_CONTEXT_WIN scan_context = (YR_SCAN_CONTEXT_WIN)Marshal.PtrToStructure(scanContext, typeof(YR_SCAN_CONTEXT_WIN));
                 return scan_context.matches;
             }
 
             if (Environment.OSVersion.Platform == PlatformID.Unix)
             {
-                YR_SCAN_CONTEXT_LINUX scan_context = new YR_SCAN_CONTEXT_LINUX();
-                Marshal.PtrToStructure(scanContext, scan_context);
+                YR_SCAN_CONTEXT_LINUX scan_context = (YR_SCAN_CONTEXT_LINUX)Marshal.PtrToStructure(scanContext, typeof(YR_SCAN_CONTEXT_LINUX));
+
                 return scan_context.matches;
             }
 
             if (Environment.OSVersion.Platform == PlatformID.MacOSX)
             {
-                YR_SCAN_CONTEXT_OSX scan_context = new YR_SCAN_CONTEXT_OSX();
-                Marshal.PtrToStructure(scanContext, scan_context);
+                YR_SCAN_CONTEXT_OSX scan_context = (YR_SCAN_CONTEXT_OSX)Marshal.PtrToStructure(scanContext, typeof(YR_SCAN_CONTEXT_OSX));
+
                 return scan_context.matches;
             }
             return IntPtr.Zero;

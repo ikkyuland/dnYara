@@ -31,12 +31,12 @@ namespace dnYara.Interop
         public IntPtr code_start;
 
         // Total number of rules.
-        public uint num_rules;
+        public UInt32 num_rules;
 
         // Total number of strings.
-        public uint num_strings;
+        public UInt32 num_strings;
 
         // Total number of namespaces.
-        public uint num_namespaces;
+        public UInt32 num_namespaces;
     }
 }

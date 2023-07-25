@@ -44,7 +44,7 @@ namespace dnYara
             Metas = new Dictionary<string, object>();
         }
         private static (string name, object value) ExtractMetaValue (YR_META meta) {
-            var name = Marshal.PtrToStringAnsi(meta.identifier);
+            var name = Marshal.PtrToStringAnsi((IntPtr)meta.identifier);
             object v = null;
             switch((META_TYPE)meta.type) {
                 case META_TYPE.META_TYPE_NULL:
@@ -56,7 +56,7 @@ namespace dnYara
                     v = meta.integer == 0 ? false : true;
                     break;
                 case META_TYPE.META_TYPE_STRING:
-                    v = Marshal.PtrToStringAnsi(meta.strings);
+                    v = Marshal.PtrToStringAnsi((IntPtr)meta.strings);
                     break;
             }
             return (name, v);
@@ -64,10 +64,10 @@ namespace dnYara
 
         public Rule(YR_RULE rule)
         {
-            IntPtr ptr = rule.identifier;
+            IntPtr ptr = (IntPtr)rule.identifier;
             Identifier = Marshal.PtrToStringAnsi(ptr);
-            Tags = ObjRefHelper.IterateCStrings(rule.tags).ToList();
-            Metas = ObjRefHelper.GetMetas(rule.metas).Select(ExtractMetaValue).ToDictionary();
+            Tags = ObjRefHelper.IterateCStrings((IntPtr)rule.tags).ToList();
+            Metas = ObjRefHelper.GetMetas((IntPtr)rule.metas).Select(ExtractMetaValue).ToDictionary();
             AtomsCount = rule.num_atoms;
         }
     }

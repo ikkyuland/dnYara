@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data;
+using System.Reflection.Metadata;
 using dnYara;
 
 namespace YaraInteractive
@@ -10,7 +12,6 @@ namespace YaraInteractive
             using (var ctx = new YaraContext())
             {
                 Console.WriteLine("# Welcome to Yara Interactive Console...");
-
                 while (true)
                 {
                     Console.Write("> ");

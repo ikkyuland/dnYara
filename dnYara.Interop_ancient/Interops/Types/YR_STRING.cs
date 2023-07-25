@@ -30,7 +30,7 @@ namespace dnYara.Interop
 
         /// Pointer to the string itself, the length is indicated by the "length"
         /// field.
-        public IntPtr string_content;
+        public long string_content;
 
 
         /// Strings are splitted in two or more parts when they contain a "gap" that
@@ -43,7 +43,7 @@ namespace dnYara.Interop
         /// { 01 02 03 04 }. The same applies when the string is splitted in more than
         /// two parts, if S is split in S1, S2, and S3. S3 is chained to S2 and S2 is
         /// chained to S1 (it can represented as: S1 <- S2 <- S3).
-        public IntPtr chained_to;
+        public long chained_to;
 
         /// When this string is chained to some other string, chain_gap_min and
         /// chain_gap_max contain the minimum and maximum distance between the two
@@ -62,7 +62,7 @@ namespace dnYara.Interop
         public int chain_gap_max;
 
         /// Identifier of this string.
-        public IntPtr identifier;
+        public long identifier;
     }
 
 }

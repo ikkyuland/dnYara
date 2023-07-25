@@ -20,10 +20,16 @@
 
 The compiled libyara shared library for Windows can be provided by dnYara.NativePack.
 You can also compile the library yourself for your platform with cmake (instruction at https://github.com/airbus-cert/dnYara).</Description>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
 

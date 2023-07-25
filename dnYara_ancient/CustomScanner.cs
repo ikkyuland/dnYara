@@ -246,8 +246,7 @@ namespace dnYara
             {
                 var resultsHandle = GCHandle.FromIntPtr(user_data);
                 var results = (List<ScanResult>)resultsHandle.Target;
-                YR_RULE rule = new YR_RULE();
-                Marshal.PtrToStructure(message_data,rule);
+                YR_RULE rule = (YR_RULE)Marshal.PtrToStructure(message_data, typeof(YR_RULE));
                 results.Add(new ScanResult(context, rule));
             }
 

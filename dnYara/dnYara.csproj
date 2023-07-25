@@ -23,9 +23,15 @@ You can also compile the library yourself for your platform with cmake (instruct
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageId>dnYara</PackageId>
     <Product>dnYara (for Yara 4.0.0 to 4.1.1)</Product>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants>TRACE;</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>TRACE;</DefineConstants>
   </PropertyGroup>

@@ -12,15 +12,15 @@ namespace dnYara.Interop
         // Number of atoms generated for this rule.
         public int num_atoms;
 
-        public IntPtr identifier;
+        public long identifier;
 
-        public IntPtr tags;
+        public long tags;
 
-        public IntPtr metas;
+        public long metas;
 
-        public IntPtr strings;
+        public long strings;
 
-        public IntPtr ns;
+        public long ns;
     }
 
 }

@@ -61,24 +61,27 @@ namespace dnYara.Interop
 
         /// walks a variable-sized array of pointers of type T, marshalling and running a custom validation function on each iteration of the pointer
         /// This is an abstraction around specialized loops like `ForEachYaraMetaInObjRef`
-        public static IEnumerable<T> EachStructOfTInObjRef<T>(IntPtr ref_obj, Func<T, bool> validityChecker, Func<IntPtr, T, IntPtr> incrementer) where T : struct
+        public static IEnumerable<T> EachStructOfTInObjRef<T>(IntPtr ref_obj, Func<T, bool> validityChecker, Func<IntPtr, T, IntPtr> incrementer, uint maxNum=uint.MaxValue) where T : struct
         {
+            int i = 0;
             T structPtr;
             for (
                 IntPtr structArrayPtr = ref_obj;
-                MarshalAndValidate(structArrayPtr, validityChecker, out structPtr);
+                MarshalAndValidate(structArrayPtr, validityChecker, out structPtr) && i < maxNum;
                 structArrayPtr = incrementer(structArrayPtr, structPtr)
             )
             {
+                ++i;
                 yield return structPtr;
             }
         }
 
-        public static IEnumerable<YR_RULE> GetRules(IntPtr rulesPtr) =>
+        public static IEnumerable<YR_RULE> GetRules(IntPtr rulesPtr, uint maxNum) =>
             EachStructOfTInObjRef<YR_RULE>(
                 rulesPtr, 
                 (rule => !RuleIsNull(rule)),
-                IncrementByStructSize<YR_RULE>
+                IncrementByStructSize<YR_RULE>,
+                maxNum
             );
 
 
@@ -94,7 +97,7 @@ namespace dnYara.Interop
         public static string ReadYaraString(YR_STRING s)
         {
             string outStr;
-            SafeMarshalString(s.identifier, out outStr);
+            SafeMarshalString((IntPtr)s.identifier, out outStr);
             return outStr;
         }
 

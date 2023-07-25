@@ -15,9 +15,9 @@ namespace dnYara.Interop
         /// <summary>
         /// Meta identifier.
         /// </summary>
-        public IntPtr identifier;
+        public long identifier;
 
-        public IntPtr strings;
+        public long strings;
 
         public long integer;
 

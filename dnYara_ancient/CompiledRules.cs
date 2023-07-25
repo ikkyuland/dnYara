@@ -28,10 +28,9 @@ namespace dnYara
 
         private void ExtractData()
         {
-            YR_RULES ruleStruct = new YR_RULES();
-            Marshal.PtrToStructure(BasePtr, ruleStruct);
+            YR_RULES ruleStruct = (YR_RULES)Marshal.PtrToStructure(BasePtr, typeof(YR_RULES));
             Rules = ObjRefHelper
-                .GetRules(ruleStruct.rules_list_head)
+                .GetRules(ruleStruct.rules_list_head,ruleStruct.num_rules)
                 .Select(rule => new Rule(rule))
                 .ToList();
             RuleCount = ruleStruct.num_rules;
