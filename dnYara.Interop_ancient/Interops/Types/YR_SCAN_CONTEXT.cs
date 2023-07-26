@@ -17,6 +17,20 @@ namespace dnYara.Interop
         RE_FIBER_LIST fibers;
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    public struct RE_FAST_EXEC_POSITION
+    {
+        public int round;
+        public IntPtr input;
+        IntPtr prev;
+        IntPtr next;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct RE_FAST_EXEC_POSITION_POOL
+    {
+        IntPtr head;
+    }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct YR_SCAN_CONTEXT_WIN
@@ -66,6 +80,9 @@ namespace dnYara.Interop
         /// Fiber pool used by yr_re_exec.
         public RE_FIBER_POOL re_fiber_pool;
 
+        // Pool used by yr_re_fast_exec.
+        public RE_FAST_EXEC_POSITION_POOL re_fast_exec_position_pool;
+
         /// A bitmap with one bit per rule, bit N is set when the rule with index N
         /// has matched.
         public IntPtr rule_matches_flags;
@@ -73,6 +90,8 @@ namespace dnYara.Interop
         /// A bitmap with one bit per namespace, bit N is set if the namespace with
         /// index N has some global rule that is not satisfied.
         public IntPtr ns_unsatisfied_flags;
+
+        public IntPtr strings_temp_disabled;
 
         /// Array with pointers to lists of matches. Item N in the array has the
         /// list of matches for string with index N.
