@@ -149,12 +149,12 @@ namespace dnYara
 
             IntPtr btCpy = Marshal.AllocHGlobal(buffer.Length); ;
             Marshal.Copy(buffer, 0, btCpy, (int)buffer.Length);
-
+            //System.Diagnostics.Debugger.Break();
             ErrorUtility.ThrowOnError(
                 Methods.yr_rules_scan_mem(
                     rules.BasePtr,
                     btCpy,
-                    (ulong)length,
+                    length,
                     (int)flags,
                     callbackPtr,
                     resultsHandle.GetPointer(),
