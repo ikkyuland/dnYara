@@ -17,7 +17,7 @@
     <PackageId>dnYara.NativePack</PackageId>
     <Product>dnYara.NativePack (for Yara 4.1.1)</Product>
     <Description>Provide Yara 4.1.1 shared library (libyara) for Windows, with all modules.</Description>
-    <Platforms>AnyCPU;x86</Platforms>
+    <Platforms>AnyCPU;x86;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
