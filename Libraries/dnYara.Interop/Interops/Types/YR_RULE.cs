@@ -14,20 +14,35 @@ namespace dnYara.Interop
         // Number of atoms generated for this rule.
         public int num_atoms;
 
-        [FieldOffset(12)]
+        [FieldOffset(8)]
         public IntPtr identifier;
 
-        [FieldOffset(20)]
+        [FieldOffset(12)]
+        public int identifier_;
+
+        [FieldOffset(16)]
         public IntPtr tags;
 
-        [FieldOffset(28)]
+        [FieldOffset(20)]
+        public int tags_;
+
+        [FieldOffset(24)]
         public IntPtr metas;
 
-        [FieldOffset(36)]
+        [FieldOffset(28)]
+        public int metas_;
+
+        [FieldOffset(32)]
         public IntPtr strings;
 
-        [FieldOffset(44)]
+        [FieldOffset(36)]
+        public int strings_;
+
+        [FieldOffset(40)]
         public IntPtr ns;
+
+        [FieldOffset(44)]
+        public int ns_;
     }
 
 }
