@@ -174,7 +174,7 @@ namespace dnYara
             var marshaledRule = rule == IntPtr.Zero
                 ? new System.Nullable<YR_RULE>()
                 : Marshal.PtrToStructure<YR_RULE>(rule);
-            var ruleName = marshaledRule.HasValue ? "No Rule" : Marshal.PtrToStringAnsi(RuntimeInformation.ProcessArchitecture== Architecture.X86? (IntPtr)marshaledRule.Value.identifier_: marshaledRule.Value.identifier);
+            var ruleName = marshaledRule.HasValue ? "No Rule" : Marshal.PtrToStringAnsi(RuntimeInformation.ProcessArchitecture == Architecture.X86? (IntPtr)marshaledRule.Value.identifier: marshaledRule.Value.identifier);
             var msg = string.Format("rule {3}, Line {1}, file: {2}: {0}",
                 message,
                 lineNumber,

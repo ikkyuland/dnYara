@@ -64,10 +64,10 @@ namespace dnYara
 
         public Rule(YR_RULE rule)
         {
-            IntPtr ptr = RuntimeInformation.ProcessArchitecture == Architecture.X86 ? (IntPtr)rule.identifier_ : rule.identifier;
+            IntPtr ptr = RuntimeInformation.ProcessArchitecture == Architecture.X86 ? (IntPtr)rule.identifier : rule.identifier;
             Identifier = Marshal.PtrToStringAnsi(ptr);
-            Tags = ObjRefHelper.IterateCStrings(RuntimeInformation.ProcessArchitecture == Architecture.X86 ? (IntPtr)rule.tags_ : rule.tags).ToList();
-            Metas = ObjRefHelper.GetMetas(RuntimeInformation.ProcessArchitecture == Architecture.X86 ? (IntPtr)rule.metas_ : rule.metas).Select(ExtractMetaValue).ToDictionary();
+            Tags = ObjRefHelper.IterateCStrings(RuntimeInformation.ProcessArchitecture == Architecture.X86 ? (IntPtr)rule.tags : rule.tags).ToList();
+            Metas = ObjRefHelper.GetMetas(RuntimeInformation.ProcessArchitecture == Architecture.X86 ? (IntPtr)rule.metas : rule.metas).Select(ExtractMetaValue).ToDictionary();
             AtomsCount = rule.num_atoms;
         }
     }

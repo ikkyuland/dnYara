@@ -27,14 +27,12 @@ namespace dnYara
             MatchingRule = new Rule(matchingRule);
             Matches = new Dictionary<string, List<Match>>();
 
-            var matchingStrings = ObjRefHelper.GetYaraStrings(RuntimeInformation.ProcessArchitecture == Architecture.X86 ? (IntPtr)matchingRule.strings_ : matchingRule.strings);
+            var matchingStrings = ObjRefHelper.GetYaraStrings(RuntimeInformation.ProcessArchitecture == Architecture.X86 ? (IntPtr)matchingRule.strings : matchingRule.strings);
             foreach (var str in matchingStrings)
             {
                 var identifier = str.identifier;
-
                 if (identifier == IntPtr.Zero)
                     return;
-
                 var matches = ObjRefHelper.GetStringMatches(matchesPtr, str);
 
                 foreach (var match in matches)
