@@ -10,7 +10,7 @@ namespace dnYara.Interop
         public IntPtr tail;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct RE_FIBER_POOL
     {
         public int fiber_count;
@@ -166,7 +166,7 @@ namespace dnYara.Interop
     }
 
     
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential,Pack =8)]
     public struct YR_SCAN_CONTEXT_LINUX
     {
         /// File size of the file being scanned.

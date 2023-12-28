@@ -90,14 +90,12 @@ namespace dnYara
             if (Environment.OSVersion.Platform == PlatformID.Unix)
             {
                 YR_SCAN_CONTEXT_LINUX scan_context = (YR_SCAN_CONTEXT_LINUX)Marshal.PtrToStructure(scanContext, typeof(YR_SCAN_CONTEXT_LINUX));
-
                 return scan_context.matches;
             }
 
             if (Environment.OSVersion.Platform == PlatformID.MacOSX)
             {
                 YR_SCAN_CONTEXT_OSX scan_context = (YR_SCAN_CONTEXT_OSX)Marshal.PtrToStructure(scanContext, typeof(YR_SCAN_CONTEXT_OSX));
-
                 return scan_context.matches;
             }
             return IntPtr.Zero;

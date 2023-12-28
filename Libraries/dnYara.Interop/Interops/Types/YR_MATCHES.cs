@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace dnYara.Interop
 {
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential,Pack =8)]
     public struct YR_MATCHES
     {
 

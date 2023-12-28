@@ -48,7 +48,7 @@ namespace dnYara.Interop
         public int chain_length;
 
         /// True if this is match for a private string.
-        public bool is_private;
+        public byte is_private;
     }
 
 }

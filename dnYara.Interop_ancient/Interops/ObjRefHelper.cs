@@ -112,7 +112,7 @@ namespace dnYara.Interop
                     Yes<YR_MATCH>,
                     ((ptr, m) => m.next)
                 )
-                .Where(m => !m.is_private);
+                .Where(m => m.is_private <= 0);
         }
 
         private static YR_MATCH GetMatchFromObjRef(IntPtr objRef)

@@ -103,13 +103,13 @@ namespace dnYara.Interop
         public static IEnumerable<YR_MATCH> GetStringMatches(IntPtr matches, YR_STRING str)
         {
             var string_matches = IndexedGet<YR_MATCHES>(matches, (int)str.idx);
-
+            //Console.WriteLine(string_matches.head.ToString("x"));
             return
                 EachStructOfTInObjRef<YR_MATCH>(string_matches.head,
                     Yes<YR_MATCH>,
                     ((ptr, m) => m.next)
                 )
-                .Where(m => !m.is_private);
+                .Where(m => m.is_private<=0);
         }
 
         private static YR_MATCH GetMatchFromObjRef(IntPtr objRef)

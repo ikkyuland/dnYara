@@ -25,13 +25,13 @@ namespace dnYara.Interop
 
     [StructLayout(LayoutKind.Sequential)]
     public struct timeval {
-        public long tv_sec;
+        public int tv_sec;
         public int tc_usec;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct timespec {
-        public long tv_sec;
+        public int tv_sec;
         public int tc_nsec;
     }
 
