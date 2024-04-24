@@ -150,11 +150,14 @@ namespace dnYara
             IntPtr btCpy = Marshal.AllocHGlobal(buffer.Length); ;
             Marshal.Copy(buffer, 0, btCpy, (int)buffer.Length);
 
+            // to make it working for both x86 and x64
+            UIntPtr lengthUIntPtr = new UIntPtr(Convert.ToUInt32(length));
+
             ErrorUtility.ThrowOnError(
                 Methods.yr_rules_scan_mem(
                     rules.BasePtr,
                     btCpy,
-                    (ulong)length,
+                    lengthUIntPtr,
                     (int)flags,
                     callbackPtr,
                     resultsHandle.GetPointer(),

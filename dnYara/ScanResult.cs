@@ -73,7 +73,7 @@ namespace dnYara
                 return scan_context.profiling_info;
             }
 
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD))
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
                 YR_SCAN_CONTEXT_LINUX scan_context = (YR_SCAN_CONTEXT_LINUX)Marshal.PtrToStructure(scanContext, typeof(YR_SCAN_CONTEXT_LINUX));
                 return scan_context.profiling_info;
@@ -97,7 +97,7 @@ namespace dnYara
                 return scan_context.matches;
             }
 
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)|| RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD))
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
                 YR_SCAN_CONTEXT_LINUX scan_context = (YR_SCAN_CONTEXT_LINUX)Marshal.PtrToStructure(scanContext, typeof(YR_SCAN_CONTEXT_LINUX));
                 Console.WriteLine(scan_context.matches.ToString("x"));

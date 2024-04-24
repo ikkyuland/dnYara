@@ -268,7 +268,7 @@ namespace dnYara.Interop
         public static extern YARA_ERROR yr_rules_scan_mem(
             IntPtr rulesPtr,
             IntPtr buffer,
-            ulong buffer_size,
+            UIntPtr buffer_size,
             int flags,
             [MarshalAs(UnmanagedType.FunctionPtr)]
             YR_CALLBACK_FUNC callback,
