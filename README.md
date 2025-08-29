@@ -38,7 +38,7 @@ It is important to make sure that you have Yara 4.0 ++ compiled beside it
 #### Using NuGet package *dnYara.NativePack* to catch Yara 4.1.1 shared library for Windows
 
 You can use a pre-compiled version of Yara 4.1.1 shared library for Windows by using *dnYara.NativePack* NuGet package:
-`dotnet add package dnYara.NativePack --version 2.1.4.1`
+`dotnet add package dnYara.NativePack --version 2.1.5.1`
 
 This will put the pre-compiled libyara.dll (64 bits) aside your project.
 
