@@ -1,10 +1,12 @@
 ﻿using dnYara.Interop;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
+using System.Data;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
+using System.Text;
 
 namespace dnYara
 {
@@ -214,23 +216,36 @@ namespace dnYara
         {
             YR_CALLBACK_FUNC scannerCallback = new YR_CALLBACK_FUNC(HandleMessage);
             List<ScanResult> scanResults = new List<ScanResult>();
-            GCHandleHandler resultsHandle = new GCHandleHandler(scanResults);
-            Methods.yr_scanner_set_callback(customScannerPtr, scannerCallback, resultsHandle.GetPointer());
+            using (GCHandleHandler resultsHandle = new GCHandleHandler(scanResults))
+            {
+                Methods.yr_scanner_set_callback(customScannerPtr, scannerCallback, resultsHandle.GetPointer());
 
-            SetFlags(flags);
-            SetExternalVariables(externalVariables);
+                SetFlags(flags);
+                SetExternalVariables(externalVariables);
 
-            IntPtr btCpy = Marshal.AllocHGlobal(buffer.Length); ;
-            Marshal.Copy(buffer, 0, btCpy, (int)buffer.Length);
+                IntPtr btCpy = IntPtr.Zero;
+                try
+                {
+                    btCpy = Marshal.AllocHGlobal(buffer.Length); ;
+                    Marshal.Copy(buffer, 0, btCpy, (int)buffer.Length);
 
-            ErrorUtility.ThrowOnError(
-                Methods.yr_scanner_scan_mem(
-                    customScannerPtr,
-                    btCpy,
-                    (ulong)length
-                    ));
+                    ErrorUtility.ThrowOnError(
+                        Methods.yr_scanner_scan_mem(
+                            customScannerPtr,
+                            btCpy,
+                            (ulong)length
+                            ));
 
-            ClearExternalVariables(externalVariables);
+                    ClearExternalVariables(externalVariables);
+                }
+                finally
+                {
+                    if (btCpy != IntPtr.Zero)
+                    {
+                        Marshal.FreeHGlobal(btCpy);
+                    }
+                }
+            }
 
             return scanResults;
         }

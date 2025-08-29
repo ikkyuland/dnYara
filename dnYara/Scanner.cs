@@ -144,26 +144,37 @@ namespace dnYara
             CompiledRules rules,
             YR_SCAN_FLAGS flags)
         {
-            var results = new List<ScanResult>();
-            GCHandleHandler resultsHandle = new GCHandleHandler(results);
+            List<ScanResult> list = new List<ScanResult>();
 
-            IntPtr btCpy = Marshal.AllocHGlobal(buffer.Length); ;
-            Marshal.Copy(buffer, 0, btCpy, (int)buffer.Length);
+            using (GCHandleHandler gCHandleHandler = new GCHandleHandler(list))
+            {
+                IntPtr btCpy = IntPtr.Zero;
+                try
+                {
+                    btCpy = Marshal.AllocHGlobal(buffer.Length);
+                    Marshal.Copy(buffer, 0, btCpy, (int)buffer.Length);
 
-            // to make it working for both x86 and x64
-            UIntPtr lengthUIntPtr = new UIntPtr(Convert.ToUInt32(length));
+                    // to make it working for both x86 and x64
+                    UIntPtr lengthUIntPtr = new UIntPtr(Convert.ToUInt32(length));
 
-            ErrorUtility.ThrowOnError(
-                Methods.yr_rules_scan_mem(
-                    rules.BasePtr,
-                    btCpy,
-                    lengthUIntPtr,
-                    (int)flags,
-                    callbackPtr,
-                    resultsHandle.GetPointer(),
-                    YR_TIMEOUT));
-
-            return results;
+                    ErrorUtility.ThrowOnError(Methods.yr_rules_scan_mem(
+                        rules.BasePtr,
+                        btCpy,
+                        lengthUIntPtr,
+                        (int)flags,
+                        callbackPtr,
+                        gCHandleHandler.GetPointer(),
+                        YR_TIMEOUT));
+                }
+                finally
+                {
+                    if (btCpy != IntPtr.Zero)
+                    {
+                        Marshal.FreeHGlobal(btCpy);
+                    }
+                }
+            }
+            return list;
         }
 
         private YR_CALLBACK_RESULT HandleMessage(
